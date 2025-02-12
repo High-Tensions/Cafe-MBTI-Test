@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: cafeMbtiTest
+
+  spring:
+    datasource:
+      url: jdbc:postgresql://${DATABASE_HOST}:${POSTGRESQL_DATABASE_PORT}/${POSTGRESQL_DATABASE_NAME}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      driver-class-name: org.postgresql.Driver
