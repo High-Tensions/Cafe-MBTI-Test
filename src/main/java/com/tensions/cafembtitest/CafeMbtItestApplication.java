@@ -1,0 +1,13 @@
+package com.tensions.cafembtitest;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CafeMbtItestApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CafeMbtItestApplication.class, args);
+    }
+
+}
