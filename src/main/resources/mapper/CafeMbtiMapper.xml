@@ -9,4 +9,12 @@
         INSERT INTO tb_mbti_result (mbti)
         VALUES(#{result})
     </insert>
+
+    <select id="getMbtiPercent" parameterType="string" resultType="int">
+        SELECT
+               (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM tb_mbti_result)) AS percentage
+        FROM tb_mbti_result a
+        WHERE a.mbti = #{result}
+        GROUP BY a.mbti;
+    </select>
 </mapper>
