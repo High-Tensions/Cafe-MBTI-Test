@@ -41,7 +41,7 @@ public class CafeMbtiServiceImpl implements CafeMbtiService {
 
     @Override
     public int getPeopleCount() {
-        int count = cafeMbtiMapper.getPeopleCount();
-        return count;
+        int ratio = cafeMbtiMapper.getPeopleCount();
+        return ratio;
     }
 }

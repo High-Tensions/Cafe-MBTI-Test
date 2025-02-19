@@ -30,9 +30,9 @@ public class CafeMbtiController {
         cafeMbtiDTO.setJ(requestMbtiResultVO.getJ());
 
         String result = cafeMbtiService.mbtiResult(cafeMbtiDTO);
-        float percent = cafeMbtiService.mbtiPercent(result);
+        float ratio = cafeMbtiService.mbtiPercent(result);
 
-        System.out.println("percent: " + percent);
+        System.out.println("percent: " + ratio);
 
         return result;
     }
