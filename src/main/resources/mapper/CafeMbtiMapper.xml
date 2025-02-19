@@ -10,9 +10,9 @@
         VALUES(#{result})
     </insert>
 
-    <select id="getMbtiPercent" parameterType="string" resultType="int">
+    <select id="getMbtiPercent" parameterType="string" resultType="float">
         SELECT
-               (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM tb_mbti_result)) AS percentage
+        ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM tb_mbti_result)), 1) AS percentage
         FROM tb_mbti_result a
         WHERE a.mbti = #{result}
         GROUP BY a.mbti;

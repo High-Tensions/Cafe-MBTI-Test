@@ -33,8 +33,8 @@ public class CafeMbtiServiceImpl implements CafeMbtiService {
     }
 
     @Override
-    public int mbtiPercent(String result) {
-        int percent = cafeMbtiMapper.getMbtiPercent(result);
+    public float mbtiPercent(String result) {
+        float percent = cafeMbtiMapper.getMbtiPercent(result);
 
         return percent;
     }
