@@ -4,10 +4,7 @@ import com.tensions.cafembtitest.dto.CafeMbtiDTO;
 import com.tensions.cafembtitest.service.CafeMbtiService;
 import com.tensions.cafembtitest.vo.request.RequestMbtiResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/result")
@@ -38,6 +35,12 @@ public class CafeMbtiController {
         System.out.println("percent: " + percent);
 
         return result;
+    }
+
+    @GetMapping("/main/count")
+    public int getPeopleCount() {
+        int count = cafeMbtiService.getPeopleCount();
+        return count;
     }
 
 }

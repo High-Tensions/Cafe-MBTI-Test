@@ -6,4 +6,6 @@ public interface CafeMbtiService {
     String mbtiResult(CafeMbtiDTO cafeMbtiDTO);
 
     float mbtiPercent(String result);
+
+    int getPeopleCount();
 }

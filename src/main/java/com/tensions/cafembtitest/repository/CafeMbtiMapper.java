@@ -8,4 +8,6 @@ public interface CafeMbtiMapper {
     void setMbtiResult(@Param("result") String result);
 
     float getMbtiPercent(@Param("result") String result);
+
+    int getPeopleCount();
 }

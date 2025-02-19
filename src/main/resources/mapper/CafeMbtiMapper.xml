@@ -17,4 +17,10 @@
         WHERE a.mbti = #{result}
         GROUP BY a.mbti;
     </select>
+
+    <select id="getPeopleCount" parameterType="int">
+        SELECT
+               COUNT(*)
+          FROM tb_mbti_result a
+    </select>
 </mapper>

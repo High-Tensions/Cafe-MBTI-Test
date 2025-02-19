@@ -38,4 +38,10 @@ public class CafeMbtiServiceImpl implements CafeMbtiService {
 
         return percent;
     }
+
+    @Override
+    public int getPeopleCount() {
+        int count = cafeMbtiMapper.getPeopleCount();
+        return count;
+    }
 }
