@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카페 MBTI 테스트</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .start-image {
+            width: 300px;
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+        }
+        .start-button {
+            background-color: #ddd;
+            padding: 10px 20px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .link {
+            margin-top: 20px;
+            display: block;
+            color: teal;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>카페 MBTI 테스트</h1>
+    <p>[ 나는 어떤 음료일까?? ]</p>
+
+    <div class="start-image">
+        시작 이미지
+    </div>
+
+    <form action="mbti_test.html" method="get">
+        <button class="start-button">테스트 시작!</button>
+    </form>
+    <p th:text="${participants} + '명이 참여했어요!'"></p>
+
+    <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">High-Tensions</a>
+</div>
+</body>
+</html>
