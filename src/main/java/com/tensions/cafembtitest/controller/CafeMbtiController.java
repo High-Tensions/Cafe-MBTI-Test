@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/result")
+@RequestMapping("/api/v1")
 public class CafeMbtiController {
 
     private final CafeMbtiService cafeMbtiService;
@@ -17,7 +17,7 @@ public class CafeMbtiController {
         this.cafeMbtiService = cafeMbtiService;
     }
 
-    @PostMapping("/mbti")
+    @PostMapping("/result/mbti")
     public String mbtiResult(@RequestBody RequestMbtiResultVO requestMbtiResultVO) {
         CafeMbtiDTO cafeMbtiDTO = new CafeMbtiDTO();
         cafeMbtiDTO.setE(requestMbtiResultVO.getE());
