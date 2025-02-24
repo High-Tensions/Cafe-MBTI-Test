@@ -8,5 +8,12 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false # default true, 개발 시에는 false로 두는 것이 좋음
+
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
