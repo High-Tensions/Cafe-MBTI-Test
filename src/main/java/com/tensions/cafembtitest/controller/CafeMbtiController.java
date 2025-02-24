@@ -49,4 +49,9 @@ public class CafeMbtiController {
         return "mbti_main";
     }
 
+    @GetMapping("/test")
+    public String getMbtiTest() {
+        return "mbti_test";
+    }
+
 }
