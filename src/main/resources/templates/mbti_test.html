@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MBTI 테스트</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 100px;
+        }
+        .progress-container {
+            width: 60%;
+            background-color: #eee;
+            border-radius: 5px;
+            margin: 30px auto;
+            text-align: left;
+            position: relative;
+        }
+        .progress-bar {
+            height: 8px;
+            width: 1%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        .progress-name{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            font-size: 16px;
+        }
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 14px;
+        }
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .answer-button {
+            display: block;
+            width: 40%;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #ddd;
+            border: none;
+            cursor: pointer;
+        }
+        .answer-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+
+<script>
+    let currentQuestion = 1;
+    let totalQuestions = 16;
+
+    function nextQuestion() {
+        if (currentQuestion <= totalQuestions) {
+            currentQuestion++;
+            if(currentQuestion > totalQuestions){
+                location.href = 'mbti_main.html';
+            }else{
+                updateProgress();
+            }
+        }
+    }
+
+    function updateProgress() {
+        let progress = (currentQuestion / totalQuestions) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("progressText").innerText = currentQuestion + "/" + totalQuestions;
+        document.getElementById("questionTitle").innerText = "Q" + currentQuestion;
+        document.getElementById("questionText").innerText = currentQuestion + "번째 질문입니다.";
+        document.getElementById("answerText_1").innerText = currentQuestion + "번째 질문의 1번째 답변입니다.";
+        document.getElementById("answerText_2").innerText = currentQuestion + "번째 질문의 2번째 답변입니다.";
+
+    }
+</script>
+
+<body>
+
+<!-- 진행률 바 -->
+<div class="progress-container">
+    <span class="progress-name">CAFE</span>
+    <span class="progress-text" id="progressText">1/16</span>
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- 질문 영역 -->
+<h1 id="questionTitle">Q1</h1>
+<p class="question" id="questionText">1 번째 질문입니다.</p>
+
+<!-- 답변 버튼 -->
+<button class="answer-button" onclick="nextQuestion()">
+    <span id="answerText_1">1번째 질문의 1번째 답변입니다</span>
+</button>
+<button class="answer-button" onclick="nextQuestion()">
+    <span id="answerText_2">1번째 질문의 2번째 답변입니다</span>
+</button>
+
+
+</body>
+</html>
