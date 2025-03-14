@@ -69,11 +69,23 @@
         }
     </style>
 </head>
+<script th:inline="javascript">
+    window.onload = function() {
+        // 세션 스토리지에서 데이터 가져오기
+        const resultMbti = sessionStorage.getItem("resultMbti");
+        const ratio = sessionStorage.getItem("ratio");
+
+        if (resultMbti && ratio) {
+            document.getElementById("resultMbti").innerText = resultMbti;
+            document.getElementById("ratio").innerText = ratio + "%";
+        }
+    };
+</script>
 <body>
 <div class="container">
-    <p>( ESTP )</p>
+    <p th:id="resultMbti"></p>
     <h1 class="title">짜릿한 에너지의 소유자! <br>에스프레소 샷</h1>
-    <p>전체 테스트 참여자 중 <span class="highlight">00.0%</span>가 같은 음료입니다.</p>
+    <p>전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
 
     <div class="image-box">음료 이미지</div>
 

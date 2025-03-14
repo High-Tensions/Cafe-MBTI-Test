@@ -132,9 +132,20 @@
             J: document.getElementById("J").value
         };
 
-
         // Axios를 이용한 POST 요청
         axios.post('/api/v1/result', params)
+            .then(response => {
+                // JSON 데이터 받아오기
+                const resultMbti = response.data.resultMbti;
+                const ratio = response.data.ratio;
+
+                // 세션 스토리지에 저장 (or localStorage)
+                sessionStorage.setItem("resultMbti", resultMbti);
+                sessionStorage.setItem("ratio", ratio);
+
+                // 결과 페이지로 이동
+                window.location.href = '/api/v1/getMbtiResult';
+            })
             .catch(error => {
                 console.error("MBTI 결과 전송 중 오류 발생:", error);
             });
