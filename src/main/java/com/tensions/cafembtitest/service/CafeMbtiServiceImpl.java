@@ -5,6 +5,10 @@ import com.tensions.cafembtitest.repository.CafeMbtiMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class CafeMbtiServiceImpl implements CafeMbtiService {
 
@@ -43,5 +47,11 @@ public class CafeMbtiServiceImpl implements CafeMbtiService {
     public int getPeopleCount() {
         int ratio = cafeMbtiMapper.getPeopleCount();
         return ratio;
+    }
+
+    // mbti 질문,답변 리스트 조회
+    @Override
+    public List<Map<String,String>> selectMbtiQuestion(String num) {
+        return cafeMbtiMapper.selectMbtiQuestion(num);
     }
 }

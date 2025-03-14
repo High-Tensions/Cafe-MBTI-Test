@@ -6,21 +6,39 @@
 <mapper namespace="com.tensions.cafembtitest.repository.CafeMbtiMapper">
 
     <insert id="setMbtiResult" parameterType="string">
-        INSERT INTO tb_mbti_result (mbti)
-        VALUES(#{result})
+        INSERT INTO TB_MBTI_RESULT
+                  (
+                    MBTI
+                  , CREATED_AT
+                  )
+             VALUES
+                  (
+                    #{result}
+                  , NOW()
+                  )
     </insert>
 
     <select id="getMbtiPercent" parameterType="string" resultType="float">
         SELECT
-        ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM tb_mbti_result)), 1) AS percentage
-        FROM tb_mbti_result a
-        WHERE a.mbti = #{result}
-        GROUP BY a.mbti;
+        ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM TB_MBTI_RESULT)), 1) AS PERCENTAGE
+        FROM TB_MBTI_RESULT A
+        WHERE A.MBTI = #{result}
+        GROUP BY A.MBTI;
     </select>
 
     <select id="getPeopleCount" parameterType="int">
         SELECT
                COUNT(*)
-          FROM tb_mbti_result a
+          FROM TB_MBTI_RESULT A
+    </select>
+
+    <select id="selectMbtiQuestion" parameterType="String" resultType="map">
+        /* SQL ID: CafeMbtiMapper.selectMbtiQuestion */
+        SELECT QSTN_ID
+             , QSTN_ANS_ID
+             , QSTN_CN
+             , QSTN_ANS_MBTI
+          FROM TB_MBTI_QSTN_ANS
+         WHERE QSTN_ID = #{qstnNum};
     </select>
 </mapper>
