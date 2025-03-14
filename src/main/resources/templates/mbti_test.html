@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>MBTI 테스트</title>
     <style>
         body {
@@ -57,30 +58,95 @@
     </style>
 </head>
 
-<script>
-    let currentQuestion = 1;
-    let totalQuestions = 16;
+<script th:inline="javascript">
+    //질문 총 갯수 하드코딩 ( 추후에 총 쿼리개수/3 한 값을 출력해오는 sql문 추가 고려중 )
+    let totalQuestions = 12;
 
-    function nextQuestion() {
-        if (currentQuestion <= totalQuestions) {
-            currentQuestion++;
-            if(currentQuestion > totalQuestions){
-                location.href = 'mbti_main.html';
-            }else{
-                updateProgress();
-            }
-        }
+
+    function nextQuestion(button) {
+        let testNum = document.getElementById("testNum");
+        let curVal = parseInt(testNum.value);
+        // 해당 hidden값과 일치하는 모든 알파벳 +1하는 함수 호출
+        let getMbti = button.getAttribute("data-mbti");
+        setMbti(getMbti);
+
+        axios.get('getList', { params: { testNum: testNum.value } })
+            .then(response => {
+                let questions = response.data;
+                if (questions.length <= 0 && curVal > totalQuestions){
+
+                    //결과화면으로 이동하는 함수
+                    setResult();
+                }else{
+                    testNum.value = curVal + 1;
+                    updateProgress(questions, curVal);
+                }
+            })
+            .catch(error => {
+                console.error("질문을 불러오는 중 오류 발생:", error);
+            });
+
     }
 
-    function updateProgress() {
-        let progress = (currentQuestion / totalQuestions) * 100;
-        document.getElementById("progressBar").style.width = progress + "%";
-        document.getElementById("progressText").innerText = currentQuestion + "/" + totalQuestions;
-        document.getElementById("questionTitle").innerText = "Q" + currentQuestion;
-        document.getElementById("questionText").innerText = currentQuestion + "번째 질문입니다.";
-        document.getElementById("answerText_1").innerText = currentQuestion + "번째 질문의 1번째 답변입니다.";
-        document.getElementById("answerText_2").innerText = currentQuestion + "번째 질문의 2번째 답변입니다.";
+    // 질문 세팅 함수
+    function updateProgress(questions, curVal) {
+        let progress = (curVal / totalQuestions) * 100;
 
+        console.log("질문 : " + questions[0].qstn_cn); // 디버깅용
+        console.log("답변 1 : " + questions[1].qstn_cn); // 디버깅용
+        console.log("답변 2 : " + questions[2].qstn_cn); // 디버깅용
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("progressText").innerText = curVal + "/" + totalQuestions;
+        document.getElementById("questionTitle").innerText = "Q" + curVal;
+        document.getElementById("questionText").innerText = questions[0].qstn_cn;
+        document.getElementById("answerText_1").innerText = questions[1].qstn_cn;
+        document.getElementById("answerText_2").innerText = questions[2].qstn_cn;
+        document.getElementById("btn_1").setAttribute("data-mbti",questions[1].qstn_ans_mbti);
+        document.getElementById("btn_2").setAttribute("data-mbti",questions[2].qstn_ans_mbti);
+
+
+    }
+
+    //mbti 값 계산 함수
+    function setMbti(getMbti){
+        let hiddenVal = document.getElementById(getMbti);
+        let currentVal = parseInt(hiddenVal.value, 10); // 현재 값 숫자로 변환
+        hiddenVal.value = currentVal + 1; // 값 증가
+    }
+
+    //결과값 세팅 및 화면 이동 함수
+    function setResult(){
+        // 모든 hidden input 값을 가져오기
+        let params = {
+            E: document.getElementById("E").value,
+            I: document.getElementById("I").value,
+            N: document.getElementById("N").value,
+            S: document.getElementById("S").value,
+            F: document.getElementById("F").value,
+            T: document.getElementById("T").value,
+            P: document.getElementById("P").value,
+            J: document.getElementById("J").value
+        };
+
+        // Axios를 이용한 POST 요청
+        axios.post('/api/v1/result', params)
+            .then(response => {
+                // JSON 데이터 받아오기
+                const resultMbti = response.data.resultMbti;
+                const ratio = response.data.ratio;
+
+                // 세션 스토리지에 저장 (or localStorage)
+                sessionStorage.setItem("resultMbti", resultMbti);
+                sessionStorage.setItem("ratio", ratio);
+
+                // 결과 페이지로 이동(임시)
+                window.location.href = '/api/v1/getMbtiResult';
+                // 이게 진짜임!!!!!!!!오픈 전에 바꿔야돼 이걸로!!!!!!!!
+                // window.location.href = '/api/v1/'+resultMbti;
+            })
+            .catch(error => {
+                console.error("MBTI 결과 전송 중 오류 발생:", error);
+            });
     }
 </script>
 
@@ -93,17 +159,33 @@
     <div class="progress-bar" id="progressBar"></div>
 </div>
 
-<!-- 질문 영역 -->
-<h1 id="questionTitle">Q1</h1>
-<p class="question" id="questionText">1 번째 질문입니다.</p>
+<div>
+    <input type="hidden" id="testNum" th:value="2">
+    <input type="hidden" id="E" th:value="0">
+    <input type="hidden" id="I" th:value="0">
+    <input type="hidden" id="N" th:value="0">
+    <input type="hidden" id="S" th:value="0">
+    <input type="hidden" id="F" th:value="0">
+    <input type="hidden" id="T" th:value="0">
+    <input type="hidden" id="P" th:value="0">
+    <input type="hidden" id="J" th:value="0">
 
-<!-- 답변 버튼 -->
-<button class="answer-button" onclick="nextQuestion()">
-    <span id="answerText_1">1번째 질문의 1번째 답변입니다</span>
-</button>
-<button class="answer-button" onclick="nextQuestion()">
-    <span id="answerText_2">1번째 질문의 2번째 답변입니다</span>
-</button>
+
+    <!-- 질문 영역 -->
+    <h1 id="questionTitle">Q1</h1>
+    <p class="question" id="questionText">[[${mbtiQuestion[0]['qstn_cn']}]]</p>
+
+    <!-- 답변 버튼 -->
+    <button class="answer-button" th:id="btn_1" th:data-mbti="${mbtiQuestion[1]['qstn_ans_mbti']}"
+            onclick="nextQuestion(this)">
+        <span id="answerText_1">[[${mbtiQuestion[1]['qstn_cn']}]]</span>
+    </button>
+    <button class="answer-button" th:id="btn_2" th:data-mbti="${mbtiQuestion[2]['qstn_ans_mbti']}"
+            onclick="nextQuestion(this)">
+        <span id="answerText_2">[[${mbtiQuestion[2]['qstn_cn']}]]</span>
+    </button>
+</div>
+
 
 
 </body>
