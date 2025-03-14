@@ -19,16 +19,14 @@
     </insert>
 
     <select id="getMbtiPercent" parameterType="string" resultType="float">
-        SELECT
-        ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM TB_MBTI_RESULT)), 1) AS PERCENTAGE
-        FROM TB_MBTI_RESULT A
-        WHERE A.MBTI = #{result}
-        GROUP BY A.MBTI;
+        SELECT ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM TB_MBTI_RESULT)), 1) AS PERCENTAGE
+          FROM TB_MBTI_RESULT TMR
+         WHERE TMR.MBTI = #{result}
+      GROUP BY TMR.MBTI;
     </select>
 
     <select id="getPeopleCount" parameterType="int">
-        SELECT
-               COUNT(*)
+        SELECT COUNT(*)
           FROM TB_MBTI_RESULT A
     </select>
 

@@ -14,7 +14,7 @@
         }
         .container {
             width: 60%;
-            margin: 20px auto;
+            margin: 30px auto;
             background-color: #f8f8f8;
             padding: 20px;
             border-radius: 10px;
@@ -67,6 +67,16 @@
             font-size: 14px;
             color: gray;
         }
+        .share-button {
+            background-color: #ffd874;
+            padding: 10px 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 10px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <script th:inline="javascript">
@@ -80,6 +90,20 @@
             document.getElementById("ratio").innerText = ratio + "%";
         }
     };
+
+    function shareLink(){
+        // 현재 페이지의 URL 가져오기
+        const currentUrl = window.location.href;
+
+        // 클립보드에 복사
+        navigator.clipboard.writeText(currentUrl)
+            .then(() => {
+                alert("📋 링크가 복사되었습니다! 친구에게 공유해 보세요! 😊");
+            })
+            .catch(err => {
+                console.error("링크 복사 실패: ", err);
+            });
+    }
 </script>
 <body>
 <div class="container">
@@ -112,6 +136,13 @@
             <p><strong>짜릿한 에너지의 소유자!</strong><br>에스프레소 샷</p>
         </div>
     </div>
+
+    <div>
+        <button class="share-button" th:id="btnShare" onclick="shareLink()">
+            <span>공유해야징(❁´◡`❁)</span>
+        </button>
+    </div>
+
 
     <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">© 2025 High-Tensions</a>
 </div>
