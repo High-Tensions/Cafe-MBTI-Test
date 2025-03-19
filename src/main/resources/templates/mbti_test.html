@@ -128,25 +128,33 @@
             J: document.getElementById("J").value
         };
 
+        // 데이터를 세션 스토리지에 저장 (먼저 실행해야 함!)
+        sessionStorage.setItem("mbti_params", JSON.stringify(params));
+
+        // 로딩 페이지로 이동
+        setTimeout(() => {
+            window.location.href = "/api/v1/loading";
+        }, 500); // 0.5초 딜레이를 추가하여 데이터가 확실히 저장되도록 함
+
         // Axios를 이용한 POST 요청
-        axios.post('/api/v1/result', params)
-            .then(response => {
-                // JSON 데이터 받아오기
-                const resultMbti = response.data.resultMbti;
-                const ratio = response.data.ratio;
-
-                // 세션 스토리지에 저장 (or localStorage)
-                sessionStorage.setItem("resultMbti", resultMbti);
-                sessionStorage.setItem("ratio", ratio);
-
-                // 결과 페이지로 이동(임시)
-                window.location.href = '/api/v1/getMbtiResult';
-                // 이게 진짜임!!!!!!!!오픈 전에 바꿔야돼 이걸로!!!!!!!!
-                // window.location.href = '/api/v1/'+resultMbti;
-            })
-            .catch(error => {
-                console.error("MBTI 결과 전송 중 오류 발생:", error);
-            });
+        // axios.post('/api/v1/result', params)
+        //     .then(response => {
+        //         // JSON 데이터 받아오기
+        //         const resultMbti = response.data.resultMbti;
+        //         const ratio = response.data.ratio;
+        //
+        //         // 세션 스토리지에 저장 (or localStorage)
+        //         sessionStorage.setItem("resultMbti", resultMbti);
+        //         sessionStorage.setItem("ratio", ratio);
+        //
+        //         // 결과 페이지로 이동(임시)
+        //         window.location.href = '/api/v1/getMbtiResult';
+        //         // 이게 진짜임!!!!!!!!오픈 전에 바꿔야돼 이걸로!!!!!!!!
+        //         // window.location.href = '/api/v1/'+resultMbti;
+        //     })
+        //     .catch(error => {
+        //         console.error("MBTI 결과 전송 중 오류 발생:", error);
+        //     });
     }
 </script>
 

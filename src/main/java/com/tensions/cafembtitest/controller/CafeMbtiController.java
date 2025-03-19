@@ -73,6 +73,11 @@ public class CafeMbtiController {
         return "mbti_test";
     }
 
+    @GetMapping("/loading")
+    public String getLoading() {
+        return "mbti_loading";
+    }
+
     @GetMapping("/getList")
     public ResponseEntity<List<Map<String, String>>> selectMbtiTestList(@RequestParam("testNum") String testNum) {
         List<Map<String,String>> mbtiQuestion = cafeMbtiService.selectMbtiQuestion(testNum);
