@@ -9,73 +9,136 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow-y: auto; /* 세로 스크롤 활성화 */
-            height: 100vh;
         }
         .container {
-            width: 60%;
+            width: 90%;
+            max-width: 500px;
             margin: 30px auto;
-            background-color: #f8f8f8;
+            background-color: #ffffff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
         }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
+
         .highlight {
-            color: green;
+            color: #6B3F19;
             font-weight: bold;
         }
         .image-box {
-            width: 80%;
-            height: 200px;
-            background-color: #ddd;
-            margin: 20px auto;
+            width: 100%;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: bold;
-            color: #666;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .image-box img {
+            width: 100%;
             border-radius: 10px;
         }
-        .description {
-            text-align: left;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
+
         .best-match {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
             margin-top: 30px;
             margin-bottom: 30px;
         }
         .match-box {
-            width: 45%;
-            background: white;
-            padding: 15px;
+            width: 48%;
+            background: #C6B096;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .match-box img {
+            width: 100%;
+            border-radius: 10px;
         }
         .link {
             font-size: 14px;
             color: gray;
         }
         .share-button {
-            background-color: #ffd874;
+            background-color: #6B3F19;
             padding: 10px 20px;
             margin-top: 10px;
             margin-bottom: 20px;
-            font-size: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
             border-radius: 10px;
+            width: 100%;
+            height: 3rem;
             border: none;
             cursor: pointer;
+        }
+
+        @media (max-width: 1000px) {
+            .container {
+                width: 90%;
+                max-width: none;
+                background-color: #ffffff;
+                border-radius: 20px;
+            }
+
+            .highlight {
+                color: #6B3F19;
+                font-weight: bold;
+            }
+            .image-box {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 20px 0;
+            }
+            .image-box img {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            .best-match {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            .match-box {
+                width: 48%;
+                background: #C6B096;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 30px;
+            }
+            .match-box img {
+                width: 100%;
+                border-radius: 10px;
+            }
+            .link {
+                font-size: 20px;
+                color: gray;
+            }
+            .share-button {
+                background-color: #6B3F19;
+                padding: 10px 20px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                border-radius: 10px;
+                width: 100%;
+                height: 4rem;
+                border: none;
+                cursor: pointer;
+            }
         }
     </style>
 </head>
@@ -108,42 +171,22 @@
 <body>
 <div class="container">
     <p th:id="resultMbti"></p>
-    <h1 class="title">짜릿한 에너지의 소유자! <br>에스프레소 샷</h1>
     <p>전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
-
-    <div class="image-box">음료 이미지</div>
-
-    <div class="description">
-        <p><strong>"어디서든 즐거움을 찾는 행동파!"</strong></p>
-        <p>ESTP는 즉흥적이고 모험적인 성향을 가진 유형! 강렬한 한 잔의 에스프레소처럼 짧고 강렬하게 모든 순간을 즐깁니다.</p>
-        <p><strong>✦ 특징:</strong></p>
-        <ul>
-            <li>✔ 빠른 판단력과 도전 정신</li>
-            <li>✔ 즉흥적이고 재미있는 성격</li>
-            <li>✔ 어디서든 주목받는 분위기 메이커</li>
-        </ul>
+    <div class="image-box">
+        <img src="/img/resultImg.png" alt="MBTI 음료 결과">
     </div>
-
+    <p class="highlight">▲ 꼭 눌러 이미지 저장하기 ▲</p>
     <div class="best-match">
         <div class="match-box">
-            <p><strong>같이 마시기 좋은 음료 🍵</strong></p>
-            <div class="image-box">베스트 이미지</div>
-            <p><strong>짜릿한 에너지의 소유자!</strong><br>에스프레소 샷</p>
+            <p><strong>잘 맞는 유형</strong></p>
+            <img src="/img/result1.png" alt="잘 맞는 유형">
         </div>
         <div class="match-box">
-            <p><strong>같이 마시면 맛없는 음료 ㅠㅠ</strong></p>
-            <div class="image-box">워스트 이미지</div>
-            <p><strong>짜릿한 에너지의 소유자!</strong><br>에스프레소 샷</p>
+            <p><strong>잘 맞는 유형</strong></p>
+            <img src="/img/result2.png" alt="잘 맞는 유형">
         </div>
     </div>
-
-    <div>
-        <button class="share-button" th:id="btnShare" onclick="shareLink()">
-            <span>공유해야징(❁´◡`❁)</span>
-        </button>
-    </div>
-
-
+    <button class="share-button" onclick="shareLink()">공유하기</button><br>
     <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">© 2025 High-Tensions</a>
 </div>
 </body>
