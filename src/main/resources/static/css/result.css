@@ -25,7 +25,6 @@ body {
     width: 100%;
     max-width: 500px;
     height: 100vh;
-    background: url('/img/backgrond_pattern.png') repeat;
     background-size: cover;
     background-position: center;
     z-index: -1;
