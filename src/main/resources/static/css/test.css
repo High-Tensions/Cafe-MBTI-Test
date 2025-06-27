@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'Ownglyph_ParkDaHyun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Ownglyph_ParkDaHyun, sans-serif;
+    background: linear-gradient(to bottom, #fecbcb, #E0BBE4);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 500px;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px 0;
+    background: url('/img/test_bg.png') repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 모바일에서 container를 화면 너비에 맞춰 축소 */
+@media (max-width: 480px) {
+    .container {
+        width: 100% !important;
+        transform: none !important;
+        transform-origin: unset;
+        padding: 16px 0;
+    }
+
+    .progress-container {
+        height: 10px !important;
+        border-width: 2px;
+        margin-top: 0px !important;
+    }
+
+    .progress-text h1 {
+        font-size: 18px;
+    }
+
+    .question {
+        font-size: 18px !important;
+        margin: 12px 0 !important;
+    }
+
+    .button-section {
+        gap: 12px !important;
+        margin-bottom: 26px !important;
+    }
+
+    .answer-button {
+        padding: 12px !important;
+        font-size: 1rem !important;
+        min-height: auto;
+        width: 92%;
+    }
+}
+
+
+.progress-container {
+    width: 90%;
+    height: 15px;
+    background: #fff;
+    border: 3px solid #b39cff;
+    border-radius: 18px;
+    margin-top: 3px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.progress-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fffbe6;
+    border-radius: 18px;
+    z-index: 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffb6e6 0%, #b39cff 100%);
+    border-radius: 18px 0 0 18px;
+    transition: width 0.3s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.question-wrapper {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.progress-text h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.question {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.button-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.answer-button {
+    width: 90%;
+    padding: 18px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000;
+    background: #fff;
+    border: 3px solid #b39cff;
+    border-radius: 48px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: Ownglyph_ParkDaHyun, sans-serif;
+}
+
+.answer-button:hover {
+    background: #f3eaff;
+    color: #7c3aed;
+}
