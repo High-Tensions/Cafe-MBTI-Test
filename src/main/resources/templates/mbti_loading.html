@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로딩 페이지</title>
+    <title>카페 MBTI 테스트</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/loading.css" type="text/css" />
 </head>
 <body>
 <div class="background-container"></div>
 <div class="container">
     <div class="loading-container">
-        <img id="loading-image" src="/img/loading/image1.png" alt="Loading Image">
+        <img id="loading-image" src="/img/loading/플랫화이트.png" alt="Loading Image">
         <p class="text">음료 만드는 중...</p>
     </div>
 </div>
 
 <script>
     const images = [
-        '/img/loading/image1.png',
-        '/img/loading/image2.png'
+        '/img/loading/플랫화이트.png',
+        '/img/loading/레몬티.png',
+        '/img/loading/아포카토.png',
+        '/img/loading/딸기라떼.png'
     ];
     let index = 0;
     const imgElement = document.getElementById('loading-image');
