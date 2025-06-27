@@ -31,12 +31,13 @@
     </select>
 
     <select id="selectMbtiQuestion" parameterType="String" resultType="map">
-        /* SQL ID: CafeMbtiMapper.selectMbtiQuestion */
-        SELECT QSTN_ID
-             , QSTN_ANS_ID
-             , QSTN_CN
-             , QSTN_ANS_MBTI
-          FROM TB_MBTI_QSTN_ANS
-         WHERE QSTN_ID = #{qstnNum};
+      /* SQL ID: CafeMbtiMapper.selectMbtiQuestion */
+      SELECT QSTN_ID
+          , QSTN_ANS_ID
+          , QSTN_CN
+          , QSTN_ANS_MBTI
+      FROM TB_MBTI_QSTN_ANS
+      WHERE QSTN_ID = #{qstnNum}
+      ORDER BY QSTN_ANS_ID ASC
     </select>
 </mapper>

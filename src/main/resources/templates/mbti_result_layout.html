@@ -1,81 +1,172 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBTI 결과</title>
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            overflow-y: auto; /* 세로 스크롤 활성화 */
-            height: 100vh;
-        }
-        .container {
-            width: 60%;
-            margin: 30px auto;
-            background-color: #f8f8f8;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        .highlight {
-            color: green;
-            font-weight: bold;
-        }
-        .image-box {
-            width: 80%;
-            height: 200px;
-            background-color: #ddd;
-            margin: 20px auto;
+            background: linear-gradient(to bottom, #fecbcb, #E0BBE4);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background: url('/img/backgrond_pattern.png') repeat;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 2vh auto;
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            box-sizing: border-box;
+            min-height: 85vh;
+        }
+
+        .highlight {
+            color: #6B3F19;
             font-weight: bold;
-            color: #666;
-            border-radius: 10px;
         }
-        .description {
-            text-align: left;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+
+        .image-box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5vh 0;
         }
+
+        .image-box img {
+            width: 100%;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-box img:hover {
+            transform: scale(1.02);
+        }
+
         .best-match {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
-            margin-bottom: 30px;
+            gap: 1rem;
+            margin: 1.5vh 0;
         }
+
         .match-box {
-            width: 45%;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            background: #C6B096;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
         }
+
+        .match-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .match-box img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 0.5vh;
+        }
+
         .link {
-            font-size: 14px;
-            color: gray;
+            font-size: 0.9rem;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
+
+        .link:hover {
+            color: #6B3F19;
+        }
+
         .share-button {
-            background-color: #ffd874;
-            padding: 10px 20px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-size: 10px;
+            background-color: #6B3F19;
+            padding: 1rem;
+            margin: 1.5vh 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
             border-radius: 10px;
+            width: 100%;
             border: none;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-button:hover {
+            background-color: #8B5F39;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(107, 63, 25, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1.5vh auto;
+                padding: 1.2rem;
+                min-height: 80vh;
+            }
+
+            .match-box {
+                padding: 0.8rem;
+            }
+
+            .share-button {
+                font-size: 1rem;
+                padding: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 1vh auto;
+                padding: 1rem;
+                min-height: 75vh;
+            }
+
+            .best-match {
+                gap: 0.8rem;
+            }
+
+            .match-box {
+                padding: 0.6rem;
+            }
+
+            .share-button {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+
+            .link {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -106,44 +197,25 @@
     }
 </script>
 <body>
+<div class="background-container"></div>
 <div class="container">
     <p th:id="resultMbti"></p>
-    <h1 class="title">짜릿한 에너지의 소유자! <br>에스프레소 샷</h1>
     <p>전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
-
-    <div class="image-box">음료 이미지</div>
-
-    <div class="description">
-        <p><strong>"어디서든 즐거움을 찾는 행동파!"</strong></p>
-        <p>ESTP는 즉흥적이고 모험적인 성향을 가진 유형! 강렬한 한 잔의 에스프레소처럼 짧고 강렬하게 모든 순간을 즐깁니다.</p>
-        <p><strong>✦ 특징:</strong></p>
-        <ul>
-            <li>✔ 빠른 판단력과 도전 정신</li>
-            <li>✔ 즉흥적이고 재미있는 성격</li>
-            <li>✔ 어디서든 주목받는 분위기 메이커</li>
-        </ul>
+    <div class="image-box">
+        <img src="/img/resultImg.png" alt="MBTI 음료 결과">
     </div>
-
+    <p class="highlight">▲ 꼭 눌러 이미지 저장하기 ▲</p>
     <div class="best-match">
         <div class="match-box">
-            <p><strong>같이 마시기 좋은 음료 🍵</strong></p>
-            <div class="image-box">베스트 이미지</div>
-            <p><strong>짜릿한 에너지의 소유자!</strong><br>에스프레소 샷</p>
+            <p><strong>잘 맞는 유형</strong></p>
+            <img src="/img/result1.png" alt="잘 맞는 유형">
         </div>
         <div class="match-box">
-            <p><strong>같이 마시면 맛없는 음료 ㅠㅠ</strong></p>
-            <div class="image-box">워스트 이미지</div>
-            <p><strong>짜릿한 에너지의 소유자!</strong><br>에스프레소 샷</p>
+            <p><strong>잘 맞는 유형</strong></p>
+            <img src="/img/result2.png" alt="잘 맞는 유형">
         </div>
     </div>
-
-    <div>
-        <button class="share-button" th:id="btnShare" onclick="shareLink()">
-            <span>공유해야징(❁´◡`❁)</span>
-        </button>
-    </div>
-
-
+    <button class="share-button" onclick="shareLink()">공유하기</button><br>
     <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">© 2025 High-Tensions</a>
 </div>
 </body>

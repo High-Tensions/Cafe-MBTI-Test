@@ -1,56 +1,161 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카페 MBTI 테스트</title>
     <style>
+        @font-face {
+            font-family: 'CookieRun';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 기본 데스크탑 배경 (기존 스타일 유지) */
+        html,
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: linear-gradient(to bottom, #fecbcb, #E0BBE4);
+            /* 기본 배경 */
         }
-        .container {
-            margin-top: 50px;
+
+        /* 모바일일 때 상하단 색상 분리 */
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                background: linear-gradient(to bottom,
+                        #ffeece 0%,
+                        #ffeece 15%,
+                        #fecbcb 15%,
+                        #E0BBE4 85%,
+                        #fab88a 85%,
+                        #fab88a 100%);
+            }
         }
-        .start-image {
-            width: 300px;
-            height: 200px;
-            background-color: #ddd;
+
+
+        body {
             display: flex;
-            align-items: center;
             justify-content: center;
-            margin: 20px auto;
+            align-items: center;
         }
+
+        .wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('/img/main.png') no-repeat center center;
+            background-size: contain;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 5vh;
+        }
+
         .start-button {
-            background-color: #ddd;
-            padding: 10px 20px;
+            background-color: #a35b19;
+            color: #fff;
             border: none;
-            font-size: 18px;
+            border-radius: 50px;
+            padding: 15px 120px;
+            font-size: 1.3rem;
+            font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            min-height: 4.5rem;
         }
-        .link {
-            margin-top: 20px;
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .start-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .start-text {
+            font-size: 1.875rem;
+            font-weight: bold;
             display: block;
-            color: teal;
-            text-decoration: none;
+            margin-bottom: 5px;
+            font-family: 'CookieRun', sans-serif;
+        }
+
+        .participants {
+            font-size: 0.9375rem;
+            color: #fff;
+            font-family: 'CookieRun', sans-serif;
+        }
+
+        .email-link {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .start-button {
+                padding: 12px 60px;
+                font-size: 1.1rem;
+            }
+
+            .start-text {
+                font-size: 1.5rem;
+            }
+
+            .participants {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .start-button {
+                padding: 10px 60px;
+                font-size: 1rem;
+            }
+
+            .start-text {
+                font-size: 1.5rem;
+            }
+
+            .participants {
+                font-size: 0.9rem;
+            }
+
+            .email-link {
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
+
 <body>
-<div class="container">
-    <h1>카페 MBTI 테스트</h1>
-    <p>[ 나는 어떤 음료일까?? ]</p>
-
-    <div class="start-image">
-        <img th:src="@{../static/img/greenTea.png}" alt="녹차 이미지" >
+    <div class="wrapper">
+        <form th:action="@{/api/v1/test}" method="get">
+            <button class="start-button">
+                <span class="start-text">시작하기</span>
+                <div class="participants" th:text="'지금까지 ' + ${participants} + '명이 참여했어요!'"></div>
+            </button>
+        </form>
+        <p class="email-link">hightensions99@gmail.com</p>
     </div>
-    <!-- 이미지 표시 -->
-
-    <form th:action="@{/api/v1/test}" method="get">
-        <button class="start-button">테스트 시작!</button>
-    </form>
-    <p th:text="${participants} + '명이 참여했어요!'"></p>
-
-    <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">High-Tensions</a>
-</div>
 </body>
+
 </html>
