@@ -1,143 +1,171 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBTI 결과</title>
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to bottom, #fecbcb, #E0BBE4);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background: url('/img/backgrond_pattern.png') repeat;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
         .container {
             width: 90%;
             max-width: 500px;
-            margin: 30px auto;
+            margin: 2vh auto;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 1.5rem;
             border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            box-sizing: border-box;
+            min-height: 85vh;
         }
 
         .highlight {
             color: #6B3F19;
             font-weight: bold;
         }
+
         .image-box {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            margin: 1.5vh 0;
         }
+
         .image-box img {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-box img:hover {
+            transform: scale(1.02);
         }
 
         .best-match {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-top: 30px;
-            margin-bottom: 30px;
+            gap: 1rem;
+            margin: 1.5vh 0;
         }
+
         .match-box {
             width: 48%;
             background: #C6B096;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s ease;
         }
+
+        .match-box:hover {
+            transform: translateY(-5px);
+        }
+
         .match-box img {
             width: 100%;
             border-radius: 10px;
+            margin-top: 0.5vh;
         }
+
         .link {
-            font-size: 14px;
-            color: gray;
+            font-size: 0.9rem;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
+
+        .link:hover {
+            color: #6B3F19;
+        }
+
         .share-button {
             background-color: #6B3F19;
-            padding: 10px 20px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-size: 18px;
+            padding: 1rem;
+            margin: 1.5vh 0;
+            font-size: 1.1rem;
             font-weight: bold;
             color: white;
             border-radius: 10px;
             width: 100%;
-            height: 3rem;
             border: none;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 1000px) {
+        .share-button:hover {
+            background-color: #8B5F39;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(107, 63, 25, 0.2);
+        }
+
+        @media (max-width: 768px) {
             .container {
-                width: 90%;
-                max-width: none;
-                background-color: #ffffff;
-                border-radius: 20px;
+                margin: 1.5vh auto;
+                padding: 1.2rem;
+                min-height: 80vh;
             }
 
-            .highlight {
-                color: #6B3F19;
-                font-weight: bold;
+            .match-box {
+                padding: 0.8rem;
             }
-            .image-box {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 20px 0;
+
+            .share-button {
+                font-size: 1rem;
+                padding: 0.9rem;
             }
-            .image-box img {
-                width: 100%;
-                border-radius: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 1vh auto;
+                padding: 1rem;
+                min-height: 75vh;
             }
 
             .best-match {
-                display: flex;
-                justify-content: space-between;
-                gap: 10px;
-                margin-top: 30px;
-                margin-bottom: 30px;
-            }
-            .match-box {
-                width: 48%;
-                background: #C6B096;
-                padding: 10px;
-                border-radius: 10px;
-                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-                text-align: center;
-                font-size: 30px;
+                gap: 0.8rem;
             }
 
-            p {
-                font-size: 30px;
+            .match-box {
+                padding: 0.6rem;
             }
-            .match-box img {
-                width: 100%;
-                border-radius: 10px;
-            }
-            .link {
-                font-size: 20px;
-                color: gray;
-            }
+
             .share-button {
-                background-color: #6B3F19;
-                padding: 10px 20px;
-                margin-top: 10px;
-                margin-bottom: 20px;
-                font-size: 24px;
-                font-weight: bold;
-                color: white;
-                border-radius: 10px;
-                width: 100%;
-                height: 4rem;
-                border: none;
-                cursor: pointer;
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+
+            .link {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -169,6 +197,7 @@
     }
 </script>
 <body>
+<div class="background-container"></div>
 <div class="container">
     <p th:id="resultMbti"></p>
     <p>전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
