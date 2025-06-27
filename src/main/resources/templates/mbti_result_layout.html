@@ -1,188 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBTI 결과</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #fecbcb, #E0BBE4);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 500px;
-            height: 100vh;
-            background: url('/img/backgrond_pattern.png') repeat;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 500px;
-            margin: 2vh auto;
-            background-color: #ffffff;
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            box-sizing: border-box;
-            min-height: 85vh;
-        }
-
-        .highlight {
-            color: #6B3F19;
-            font-weight: bold;
-        }
-
-        .image-box {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 1.5vh 0;
-        }
-
-        .image-box img {
-            width: 100%;
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .image-box img:hover {
-            transform: scale(1.02);
-        }
-
-        .best-match {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            margin: 1.5vh 0;
-        }
-
-        .match-box {
-            width: 48%;
-            background: #C6B096;
-            padding: 1rem;
-            border-radius: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .match-box:hover {
-            transform: translateY(-5px);
-        }
-
-        .match-box img {
-            width: 100%;
-            border-radius: 10px;
-            margin-top: 0.5vh;
-        }
-
-        .link {
-            font-size: 0.9rem;
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .link:hover {
-            color: #6B3F19;
-        }
-
-        .share-button {
-            background-color: #6B3F19;
-            padding: 1rem;
-            margin: 1.5vh 0;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: white;
-            border-radius: 10px;
-            width: 100%;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .share-button:hover {
-            background-color: #8B5F39;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(107, 63, 25, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 1.5vh auto;
-                padding: 1.2rem;
-                min-height: 80vh;
-            }
-
-            .match-box {
-                padding: 0.8rem;
-            }
-
-            .share-button {
-                font-size: 1rem;
-                padding: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                margin: 1vh auto;
-                padding: 1rem;
-                min-height: 75vh;
-            }
-
-            .best-match {
-                gap: 0.8rem;
-            }
-
-            .match-box {
-                padding: 0.6rem;
-            }
-
-            .share-button {
-                font-size: 0.95rem;
-                padding: 0.8rem;
-            }
-
-            .link {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/result.css" type="text/css" />
 </head>
 <script th:inline="javascript">
-    window.onload = function() {
-        // 세션 스토리지에서 데이터 가져오기
+    window.onload = function () {
         const resultMbti = sessionStorage.getItem("resultMbti");
         const ratio = sessionStorage.getItem("ratio");
 
-        if (resultMbti && ratio) {
-            document.getElementById("resultMbti").innerText = resultMbti;
-            document.getElementById("ratio").innerText = ratio + "%";
+        const resultEl = document.getElementById("resultMbti");
+        const ratioEl = document.getElementById("ratio");
+
+        if (resultMbti && resultEl) {
+            resultEl.innerText = resultMbti;
+        }
+
+        if (ratio && ratioEl) {
+            ratioEl.innerText = ratio + "%";
+        }
+
+        // 이미지 동적 설정
+        if (resultMbti) {
+            // 메인 결과 이미지
+            const resultImg = document.querySelector(".image-box img");
+            resultImg.src = `/img/mbti/${resultMbti}.png`;
+
+            // 매칭 정보
+            const bestMatchMap = {
+                INFP: "INFJ", INFJ: "ENFP", ENFP: "INFJ", ENFJ: "INFP",
+                INTP: "INTJ", INTJ: "ENTP", ENTP: "INTJ", ENTJ: "INFP",
+                ISFP: "ENFJ", ISFJ: "ESFP", ESFP: "ISTJ", ESFJ: "ISFP",
+                ISTP: "ESFJ", ISTJ: "ISFP", ESTP: "ISFJ", ESTJ: "ISFP"
+            };
+
+            const worstMatchMap = {
+                INFP: "ESTJ", INFJ: "ESTP", ENFP: "ISTP", ENFJ: "ISTJ",
+                INTP: "ESFJ", INTJ: "ESFJ", ENTP: "ISFP", ENTJ: "ISFJ",
+                ISFP: "ENTJ", ISFJ: "ENTP", ESFP: "INTP", ESFJ: "INTP",
+                ISTP: "ENFJ", ISTJ: "ENFP", ESTP: "INFJ", ESTJ: "INFP"
+            };
+
+            const best = bestMatchMap[resultMbti];
+            const worst = worstMatchMap[resultMbti];
+
+            const matchImgs = document.querySelectorAll(".match-box img");
+            if (best && matchImgs[0]) {
+                matchImgs[0].src = `/img/match/${best}.png`;
+            }
+            if (worst && matchImgs[1]) {
+                matchImgs[1].src = `/img/match/${worst}.png`;
+            }
         }
     };
 
-    function shareLink(){
+    function shareLink() {
         // 현재 페이지의 URL 가져오기
         const currentUrl = window.location.href;
 
@@ -196,27 +71,32 @@
             });
     }
 </script>
+
 <body>
-<div class="background-container"></div>
-<div class="container">
-    <p th:id="resultMbti"></p>
-    <p>전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
-    <div class="image-box">
-        <img src="/img/resultImg.png" alt="MBTI 음료 결과">
-    </div>
-    <p class="highlight">▲ 꼭 눌러 이미지 저장하기 ▲</p>
-    <div class="best-match">
-        <div class="match-box">
-            <p><strong>잘 맞는 유형</strong></p>
-            <img src="/img/result1.png" alt="잘 맞는 유형">
+    <div class="background-container"></div>
+    <div class="container">
+        <!-- <p th:id="resultMbti"></p> -->
+        <p class="ratio-text">전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
+        <div class="image-box">
+            <img src="/img/mbti/ESFJ.png" alt="MBTI 음료 결과">
         </div>
-        <div class="match-box">
-            <p><strong>잘 맞는 유형</strong></p>
-            <img src="/img/result2.png" alt="잘 맞는 유형">
+        <p class="highlight">▲ 꼭 눌러 이미지 저장하기 ▲</p>
+        <div class="best-match">
+            <div class="match-box">
+                <p><strong>잘 맞는 유형</strong></p>
+                <img src="/img/match/result.png" alt="잘 맞는 유형">
+            </div>
+            <div class="match-box">
+                <p><strong>안 맞는 유형</strong></p>
+                <img src="/img/match/result.png" alt="안 맞는 유형">
+            </div>
         </div>
+        <button class="share-button" onclick="shareLink()">공유하기</button>
+        <form th:action="@{/api/v1/main}" method="get">
+            <button class="retry-button">다시하기</button>
+        </form><br>
+        <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">© 2025 High-Tensions</a>
     </div>
-    <button class="share-button" onclick="shareLink()">공유하기</button><br>
-    <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">© 2025 High-Tensions</a>
-</div>
 </body>
+
 </html>

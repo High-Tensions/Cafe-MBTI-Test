@@ -1,0 +1,216 @@
+@font-face {
+    font-family: 'CookieRun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    text-align: center;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #fecbcb, #E0BBE4);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    background: url('/img/backgrond_pattern.png') repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    margin: 2vh auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 85vh;
+}
+
+.ratio-text {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-family: 'CookieRun', sans-serif;
+}
+
+.ratio-text .highlight {
+    font-size: 1.5rem;
+    color: #30196b;
+    font-weight: 700;
+    font-family: 'CookieRun', sans-serif;
+}
+
+.highlight {
+    font-size: 1.4rem;
+    color: #30196b;
+    font-weight: 500;
+    font-family: 'CookieRun', sans-serif;
+}
+
+.image-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5vh 0;
+}
+
+.image-box img {
+    width: 100%;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.image-box img:hover {
+    transform: scale(1.02);
+}
+
+.best-match {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5vh 0;
+}
+
+.match-box {
+    width: 48%;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.match-box:hover {
+    transform: translateY(-5px);
+}
+
+.match-box img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 0.5vh;
+}
+
+.link {
+    font-size: 0.9rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    color: #461887;
+}
+
+.share-button {
+    background-color: #461887;
+    padding: 1rem;
+    margin: 1.5vh 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-button:hover {
+    background-color: #461887;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(107, 63, 25, 0.2);
+}
+
+.retry-button {
+    background-color: #7a52b0;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1.5vh auto;
+        padding: 1.2rem;
+        min-height: 80vh;
+    }
+
+    .match-box {
+        padding: 0.8rem;
+    }
+
+    .share-button {
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
+
+    .retry-button {
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 1vh auto;
+        padding: 1rem;
+        min-height: 75vh;
+    }
+
+    .best-match {
+        gap: 0.8rem;
+    }
+
+    .match-box {
+        padding: 0.6rem;
+    }
+
+    .share-button {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .retry-button {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .link {
+        font-size: 0.8rem;
+    }
+
+    .ratio-text {
+        font-size: 1rem;
+    }
+
+    .ratio-text .highlight {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .highlight {
+        font-size: 1.1rem;
+    }
