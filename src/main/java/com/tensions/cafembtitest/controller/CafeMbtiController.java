@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
-@RequestMapping("/api/v1")
+@RequestMapping("")
 public class CafeMbtiController {
 
     private final CafeMbtiService cafeMbtiService;
@@ -51,7 +51,7 @@ public class CafeMbtiController {
         return "mbti_result_layout";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String getPeopleCount(Model model) {
         int participants = cafeMbtiService.getPeopleCount();
 
