@@ -11,7 +11,7 @@
 
 <body>
     <div class="wrapper">
-        <form th:action="@{/api/v1/test}" method="get">
+        <form th:action="@{test}" method="get">
             <button class="start-button">
                 <span class="start-text">시작하기</span>
                 <div class="participants" th:text="'지금까지 ' + ${participants} + '명이 참여했어요!'"></div>
