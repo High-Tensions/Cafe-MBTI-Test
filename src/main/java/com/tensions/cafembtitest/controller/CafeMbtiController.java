@@ -42,8 +42,6 @@ public class CafeMbtiController {
         mbtiInfo.put("resultMbti", resultMbti);
         mbtiInfo.put("ratio", ratio);
 
-        System.out.println("resultMbti!!!!!!!!!!!!!! : " + resultMbti);
-        System.out.println("ratio!!!!!!!!!!!!!! : " + ratio);
         return ResponseEntity.ok(mbtiInfo);
     }
 
@@ -61,7 +59,6 @@ public class CafeMbtiController {
 
         return "mbti_main";
     }
-
 
     @GetMapping("/test")
     public String getMbtiTest(Model model) {
@@ -84,6 +81,87 @@ public class CafeMbtiController {
 
         System.out.println(mbtiQuestion);
         return ResponseEntity.ok(mbtiQuestion);
+    }
+
+    // mbti 결과페이지
+    @GetMapping("/INTJ")
+    public String getINTJ() {
+        return "mbti/INTJ";
+    }
+
+    @GetMapping("/INTP")
+    public String getINTP() {
+        return "mbti/INTP";
+    }
+
+    @GetMapping("/ENTJ")
+    public String getENTJ() {
+        return "mbti/ENTJ";
+    }
+
+    @GetMapping("/ENTP")
+    public String getENTP() {
+        return "mbti/ENTP";
+    }
+
+    @GetMapping("/INFJ")
+    public String getINFJ() {
+        return "mbti/INFJ";
+    }
+
+    @GetMapping("/INFP")
+    public String getINFP() {
+        return "mbti/INFP";
+    }
+
+    @GetMapping("/ENFJ")
+    public String getENFJ() {
+        return "mbti/ENFJ";
+    }
+
+    @GetMapping("/ENFP")
+    public String getENFP() {
+        return "mbti/ENFP";
+    }
+
+    @GetMapping("/ISTJ")
+    public String getISTJ() {
+        return "mbti/ISTJ";
+    }
+
+    @GetMapping("/ISFJ")
+    public String getISFJ() {
+        return "mbti/ISFJ";
+    }
+
+    @GetMapping("/ESFJ")
+    public String getESFJ() {
+        return "mbti/ESFJ";
+    }
+
+    @GetMapping("/ISTP")
+    public String getISTP() {
+        return "mbti/ISTP";
+    }
+
+    @GetMapping("/ISFP")
+    public String getISFP() {
+        return "mbti/ISFP";
+    }
+
+    @GetMapping("/ESTP")
+    public String getESTP() {
+        return "mbti/ESTP";
+    }
+
+    @GetMapping("/ESFP")
+    public String getESFP() {
+        return "mbti/ESFP";
+    }
+
+    @GetMapping("/ESTJ")
+    public String getESTJ() {
+        return "mbti/ESTJ";
     }
 
 }
