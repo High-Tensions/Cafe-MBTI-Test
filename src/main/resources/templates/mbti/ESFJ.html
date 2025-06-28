@@ -9,22 +9,6 @@
     <link rel="stylesheet" href="/css/result.css" type="text/css" />
 </head>
 <script th:inline="javascript">
-    window.onload = function () {
-        const resultMbti = sessionStorage.getItem("resultMbti");
-        const ratio = sessionStorage.getItem("ratio");
-
-        const resultEl = document.getElementById("resultMbti");
-        const ratioEl = document.getElementById("ratio");
-
-        if (resultMbti && resultEl) {
-            resultEl.innerText = resultMbti;
-        }
-
-        if (ratio && ratioEl) {
-            ratioEl.innerText = ratio + "%";
-        }
-    };
-
     function shareLink() {
         // 현재 페이지의 URL 가져오기
         const currentUrl = window.location.href;
@@ -43,7 +27,7 @@
 <body>
 <div class="background-container"></div>
 <div class="container">
-    <p class="ratio-text">전체 테스트 참여자 중 <span th:id="ratio" class="highlight"></span>가 같은 음료입니다.</p>
+    <p class="ratio-text">전체 테스트 참여자 중 <span class="highlight" th:text="${ratio} + '%'"></span>가 같은 음료입니다.</p>
     <div class="image-box">
         <img src="/img/mbti/ESFJ.png" alt="MBTI 음료 결과">
     </div>
