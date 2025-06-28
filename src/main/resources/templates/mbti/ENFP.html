@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페 MBTI 테스트</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/result.css" type="text/css" />
+</head>
+<script th:inline="javascript">
+    function shareLink() {
+        // 현재 페이지의 URL 가져오기
+        const currentUrl = window.location.href;
+
+        // 클립보드에 복사
+        navigator.clipboard.writeText(currentUrl)
+            .then(() => {
+                alert("📋 링크가 복사되었습니다! 친구에게 공유해 보세요! 😊");
+            })
+            .catch(err => {
+                console.error("링크 복사 실패: ", err);
+            });
+    }
+</script>
+
+<body>
+<div class="background-container"></div>
+<div class="container">
+    <p class="ratio-text">전체 테스트 참여자 중 <span class="highlight" th:text="${ratio} + '%'"></span>가 같은 음료입니다.</p>
+    <div class="image-box">
+        <img src="/img/mbti/ENFP.png" alt="MBTI 음료 결과">
+    </div>
+    <p class="highlight">▲ 꼭 눌러 이미지 저장하기 ▲</p>
+    <div class="best-match">
+        <div class="match-box">
+            <p><strong>잘 맞는 유형</strong></p>
+            <img src="/img/match/INFJ.png" alt="잘 맞는 유형">
+        </div>
+        <div class="match-box">
+            <p><strong>안 맞는 유형</strong></p>
+            <img src="/img/match/ISTP.png" alt="안 맞는 유형">
+        </div>
+    </div>
+    <button class="share-button" onclick="shareLink()">공유하기</button>
+    <form th:action="@{/api/v1/main}" method="get">
+        <button class="retry-button">다시하기</button>
+    </form><br>
+    <a class="link" href="https://github.com/High-Tensions/Cafe-MBTI-Test">© 2025 High-Tensions</a>
+</div>
+</body>
+
+</html>

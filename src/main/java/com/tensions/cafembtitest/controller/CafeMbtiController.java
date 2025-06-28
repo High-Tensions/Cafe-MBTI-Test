@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
-@RequestMapping("/api/v1")
+@RequestMapping("")
 public class CafeMbtiController {
 
     private final CafeMbtiService cafeMbtiService;
@@ -42,8 +42,6 @@ public class CafeMbtiController {
         mbtiInfo.put("resultMbti", resultMbti);
         mbtiInfo.put("ratio", ratio);
 
-        System.out.println("resultMbti!!!!!!!!!!!!!! : " + resultMbti);
-        System.out.println("ratio!!!!!!!!!!!!!! : " + ratio);
         return ResponseEntity.ok(mbtiInfo);
     }
 
@@ -53,7 +51,7 @@ public class CafeMbtiController {
         return "mbti_result_layout";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String getPeopleCount(Model model) {
         int participants = cafeMbtiService.getPeopleCount();
 
@@ -61,7 +59,6 @@ public class CafeMbtiController {
 
         return "mbti_main";
     }
-
 
     @GetMapping("/test")
     public String getMbtiTest(Model model) {
@@ -84,6 +81,119 @@ public class CafeMbtiController {
 
         System.out.println(mbtiQuestion);
         return ResponseEntity.ok(mbtiQuestion);
+    }
+
+    // mbti 결과페이지
+    @GetMapping("/INTJ")
+    public String getINTJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("INTJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/INTJ";
+    }
+
+    @GetMapping("/INTP")
+    public String getINTP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("INTP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/INTP";
+    }
+
+    @GetMapping("/ENTJ")
+    public String getENTJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ENTJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ENTJ";
+    }
+
+    @GetMapping("/ENTP")
+    public String getENTP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ENTP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ENTP";
+    }
+
+    @GetMapping("/INFJ")
+    public String getINFJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("INFJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/INFJ";
+    }
+
+    @GetMapping("/INFP")
+    public String getINFP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("INFP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/INFP";
+    }
+
+    @GetMapping("/ENFJ")
+    public String getENFJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ENFJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ENFJ";
+    }
+
+    @GetMapping("/ENFP")
+    public String getENFP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ENFP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ENFP";
+    }
+
+    @GetMapping("/ISTJ")
+    public String getISTJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ISTJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ISTJ";
+    }
+
+    @GetMapping("/ISFJ")
+    public String getISFJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ISFJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ISFJ";
+    }
+
+    @GetMapping("/ESFJ")
+    public String getESFJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ESFJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ESFJ";
+    }
+
+    @GetMapping("/ISTP")
+    public String getISTP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ISTP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ISTP";
+    }
+
+    @GetMapping("/ISFP")
+    public String getISFP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ISFP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ISFP";
+    }
+
+    @GetMapping("/ESTP")
+    public String getESTP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ESTP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ESTP";
+    }
+
+    @GetMapping("/ESFP")
+    public String getESFP(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ESFP");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ESFP";
+    }
+
+    @GetMapping("/ESTJ")
+    public String getESTJ(Model model) {
+        float ratio = cafeMbtiService.mbtiPercent("ESTJ");
+        model.addAttribute("ratio", ratio);
+        return "mbti/ESTJ";
     }
 
 }
