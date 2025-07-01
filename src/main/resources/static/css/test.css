@@ -150,3 +150,10 @@ body {
     background: #f3eaff;
     color: #7c3aed;
 }
+
+@media (hover: none) and (pointer: coarse) {
+    .answer-button:hover {
+        background: #fff !important;
+        color: inherit !important;
+    }
+}
