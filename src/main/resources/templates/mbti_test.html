@@ -33,6 +33,12 @@
             <p class="question" id="questionText">질문 불러오는 중...</p>
         </div>
 
+        <div class="back-button-bottom">
+            <button class="pre-btn" onclick="prevQuestion()">
+                < 이전
+            </button>
+        </div>
+
         <div class="button-section">
             <button class="answer-button" id="btn_1" onclick="nextQuestion(this)">
                 <span id="answerText_1">답변 1</span>
@@ -45,6 +51,7 @@
 
     <script th:inline="javascript">
         let totalQuestions = 12;
+        let questionHistory = []; // 질문과 선택 저장
 
         window.onload = function () {
             axios.get('getList', { params: { testNum: 1 } })
@@ -58,10 +65,49 @@
                 });
         };
 
+        function prevQuestion() {
+            const testNum = parseInt(document.getElementById("testNum").value);
+
+            // 첫 번째 질문이면 메인 페이지로 이동
+            if (testNum === 1 || questionHistory.length === 0) {
+                window.location.href = "/";
+                return;
+            }
+
+            const prev = questionHistory.pop();
+            document.getElementById("testNum").value = prev.testNum;
+
+            // MBTI 점수 복원
+            const prevMbti = prev.mbti;
+            const mbtiElem = document.getElementById(prevMbti);
+            mbtiElem.value = parseInt(mbtiElem.value) - 1;
+
+            // 질문 렌더링
+            document.getElementById("progressBar").style.width = (prev.testNum / totalQuestions) * 100 + "%";
+            document.getElementById("progressText").innerText = prev.testNum + "/" + totalQuestions;
+            document.getElementById("questionText").innerText = prev.questions.question;
+            document.getElementById("answerText_1").innerText = prev.questions.answer1;
+            document.getElementById("answerText_2").innerText = prev.questions.answer2;
+            document.getElementById("btn_1").setAttribute("data-mbti", prev.questions.mbti1);
+            document.getElementById("btn_2").setAttribute("data-mbti", prev.questions.mbti2);
+        }
+
         function nextQuestion(button) {
             const testNum = document.getElementById("testNum");
             const curVal = parseInt(testNum.value);
             const getMbti = button.getAttribute("data-mbti");
+
+            questionHistory.push({
+                testNum: parseInt(testNum.value),
+                mbti: getMbti,
+                questions: {
+                    question: document.getElementById("questionText").innerText,
+                    answer1: document.getElementById("answerText_1").innerText,
+                    answer2: document.getElementById("answerText_2").innerText,
+                    mbti1: document.getElementById("btn_1").getAttribute("data-mbti"),
+                    mbti2: document.getElementById("btn_2").getAttribute("data-mbti")
+                }
+            });
 
             setMbti(getMbti);
             testNum.value = curVal + 1;
