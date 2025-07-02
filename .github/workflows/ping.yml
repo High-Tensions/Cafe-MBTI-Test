@@ -2,7 +2,7 @@ name: Keep Render App Awake (ping)
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # 10분마다 실행
+    - cron: "*/5 * * * *"  # 5분마다 실행
   workflow_dispatch:
 
 jobs:
@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send ping to Render app
-        run: curl -s https://cafembtitest.onrender.com/ > /dev/null
+        run: curl -s https://hightensions.site/ > /dev/null
