@@ -1,14 +1,10 @@
 FROM azul/zulu-openjdk:17-latest
 
-# New Relic Java Agent 설치
-RUN mkdir /newrelic
-WORKDIR /newrelic
-RUN curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip \
-    && unzip newrelic-java.zip
+# New Relic 복사 (필요 시 직접 복사하거나, 빌드 단계에서 포함)
+COPY newrelic /newrelic
 
-# 앱 jar 복사
-WORKDIR /app
+# 애플리케이션 복사
 COPY build/libs/*.jar app.jar
-COPY --from=0 /newrelic/newrelic /newrelic
 
-ENTRYPOINT ["java", "-javaagent:/newrelic/newrelic.jar", "-jar", "/app.jar"]
+# New Relic Agent 실행과 함께 애플리케이션 시작
+ENTRYPOINT ["java", "-javaagent:/newrelic/newrelic.jar", "-Dnewrelic.config.file=/newrelic/newrelic.yml", "-jar", "/app.jar"]
