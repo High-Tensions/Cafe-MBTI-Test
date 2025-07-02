@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send ping to Render app
-        run: curl -s https://hightensions.site/ > /dev/null
+        run: curl -v https://hightensions.site/
