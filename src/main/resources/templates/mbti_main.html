@@ -23,7 +23,7 @@
         <form th:action="@{test}" method="get">
             <button class="start-button">
                 <span class="start-text">시작하기</span>
-                <div class="participants" th:text="'지금까지 ' + ${participants} + '명이 참여했어요!'"></div>
+                <div class="participants" th:text="'지금까지 ' + ${#numbers.formatInteger(participants, 0, 'COMMA')} + '명이 참여했어요!'"></div>
             </button>
         </form>
         <p class="email-link">hightensions99@gmail.com</p>
